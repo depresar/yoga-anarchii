@@ -1,0 +1,556 @@
+<title>Йога анархии</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="yoga_anarchy — йога как инструкция к жизни. Без эзотерики, с критическим мышлением и чёрным юмором.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: страница как «руководство по эксплуатации человека» — разделы §, таблицы, предупреждения, штампы; асимметрия, всё по левому краю */
+:root{
+  --paper:#F7F1C9;      /* светло-жёлтая бумага */
+  --sheet:#FFFBE6;      /* лист поверх бумаги */
+  --ink:#1B1215;        /* чёрный с тёплым подтоном */
+  --muted:#6F6265;      /* серый в сторону бордо */
+  --red:#E1262E;        /* сигнальный красный */
+  --wine:#5A1021;       /* бордовый */
+  --pink:#F4A7C2;       /* розовый для штампов */
+  --on-wine:#F7F1C9;
+  --line:rgba(27,18,21,.16);
+  --red-text:#B5161E;   /* красный для мелкого текста */
+
+  --f-display:"Yeseva One","Playfair Display",Georgia,"Times New Roman",serif;
+  --f-body:"Onest","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+
+  --s-hero:clamp(2.9rem,9vw,7.4rem);
+  --s-h2:clamp(2rem,4.6vw,3.6rem);
+  --s-h3:clamp(1.25rem,2vw,1.6rem);
+  --s-body:1.0625rem;
+  --s-small:.875rem;
+  --s-label:.72rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#150A0E; --sheet:#1F0F15; --ink:#F5EFCB; --muted:#B4A3A5;
+    --red:#FF3D3F; --wine:#46101C; --pink:#F29BB8; --on-wine:#F7F1C9;
+    --line:rgba(245,239,203,.16); --red-text:#FF6B6B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#150A0E; --sheet:#1F0F15; --ink:#F5EFCB; --muted:#B4A3A5;
+  --red:#FF3D3F; --wine:#46101C; --pink:#F29BB8; --on-wine:#F7F1C9;
+  --line:rgba(245,239,203,.16); --red-text:#FF6B6B; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s-body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:720px){.wrap{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
+.label{font-family:var(--f-mono);font-size:var(--s-label);letter-spacing:.12em;text-transform:uppercase}
+
+/* Шапка */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--f-mono);font-weight:600;font-size:1rem;text-decoration:none;letter-spacing:-.01em}
+.logo b{color:var(--red);font-weight:600}
+.nav{display:flex;gap:22px;align-items:center}
+.nav a{font-size:var(--s-small);text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-body);font-weight:700;font-size:.95rem;border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:13px 22px;text-decoration:none;cursor:pointer;transition:transform .15s,background .15s,border-color .15s}
+.btn:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.small{padding:8px 14px;font-size:.85rem}
+@media (max-width:820px){.nav a:not(.btn){display:none}}
+
+/* Hero */
+.hero .wrap{padding-block:clamp(40px,7vw,88px) clamp(48px,7vw,96px);display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:end}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.manual-head{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);border-top:2px solid var(--ink);padding-top:10px;margin-bottom:clamp(22px,3vw,36px)}
+.manual-head span:first-child{color:var(--ink)}
+.hero h1{font-size:var(--s-hero);letter-spacing:-.02em}
+.strike{position:relative;color:var(--muted);white-space:nowrap}
+.strike::after{content:"";position:absolute;left:-4%;right:-4%;top:54%;height:.11em;background:var(--red);transform:rotate(-4deg);transform-origin:left;animation:strike .7s .4s cubic-bezier(.6,0,.2,1) both}
+@keyframes strike{from{transform:rotate(-4deg) scaleX(0)}to{transform:rotate(-4deg) scaleX(1)}}
+.hero h1 em{font-style:normal;color:var(--red)}
+.lede{max-width:34em;margin-top:clamp(20px,3vw,32px);font-size:1.15rem;line-height:1.55}
+.lede strong{font-weight:700}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+.figure{position:relative}
+.photo{aspect-ratio:4/5;max-width:100%;width:100%;background:
+  radial-gradient(circle,var(--red) 1.3px,transparent 1.6px) 0 0/9px 9px,
+  var(--pink);border:2px solid var(--ink);display:flex;align-items:flex-end;padding:14px;position:relative;overflow:hidden}
+.photo::before{content:"";position:absolute;inset:18% 22% -10% 22%;border-radius:48% 48% 0 0;background:var(--wine);opacity:.92}
+.photo::after{content:"";position:absolute;width:30%;aspect-ratio:1;left:35%;top:10%;border-radius:50%;background:var(--wine)}
+.photo .ph{position:relative;z-index:1;background:var(--paper);color:var(--ink);padding:6px 9px;border:1px solid var(--ink)}
+.caption{margin-top:10px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
+.stamp{position:absolute;top:-22px;left:-26px;z-index:2;width:136px;aspect-ratio:1;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;text-align:center;font-family:var(--f-mono);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;line-height:1.3;padding:16px;transform:rotate(-12deg);border:2px dashed rgba(255,255,255,.7);outline:4px solid var(--red);transition:transform .3s}
+.stamp:hover{transform:rotate(6deg) scale(1.05)}
+@media (max-width:860px){.figure{max-width:420px}.stamp{left:auto;right:-6px;top:-30px;width:116px}}
+
+/* Бегущая строка */
+.ticker{background:var(--red);color:#fff;overflow:hidden;border-block:2px solid var(--ink)}
+.ticker-track{display:flex;gap:0;width:max-content;animation:tick 38s linear infinite}
+.ticker span{font-family:var(--f-mono);font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;padding:14px 0;white-space:nowrap}
+.ticker span::after{content:"✕";padding:0 22px;opacity:.8}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Разделы */
+section.sec .wrap{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px 28px;margin-bottom:clamp(32px,4vw,52px);align-items:start}
+@media (max-width:640px){.sec-head{grid-template-columns:1fr}}
+.sec-num{font-family:var(--f-mono);font-weight:600;color:var(--red-text);font-size:.95rem;padding-top:.6em;border-top:2px solid var(--red);}
+.sec-head h2{font-size:var(--s-h2);letter-spacing:-.015em}
+.sec-head p{margin-top:16px;max-width:38em;color:var(--muted)}
+
+/* §1 Таблица мифов */
+.spec{border-top:2px solid var(--ink)}
+.spec-row{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.3fr);gap:12px 28px;padding-block:22px;border-bottom:1px solid var(--line);align-items:baseline}
+.spec-row.head{padding-block:10px;color:var(--muted)}
+.spec-row .n{font-family:var(--f-mono);color:var(--muted);font-size:var(--s-small)}
+.spec-row .myth{font-family:var(--f-display);font-size:var(--s-h3);line-height:1.2;text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.spec-row .truth{max-width:36em}
+@media (max-width:760px){.spec-row{grid-template-columns:1fr;gap:8px}.spec-row.head{display:none}}
+
+/* §2 Неисправности */
+.trouble{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:0;border:2px solid var(--ink);background:var(--sheet)}
+@media (max-width:820px){.trouble{grid-template-columns:1fr}}
+.symptoms{display:flex;flex-direction:column;border-right:2px solid var(--ink)}
+@media (max-width:820px){.symptoms{border-right:0;border-bottom:2px solid var(--ink)}}
+.symptom{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:44px minmax(0,1fr) 20px;gap:10px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line);font-weight:500;transition:background .15s}
+.symptom:last-child{border-bottom:0}
+.symptom .code{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.symptom .arr{font-family:var(--f-mono);opacity:0;transition:opacity .15s,transform .15s}
+.symptom:hover{background:color-mix(in srgb,var(--pink) 30%,transparent)}
+.symptom:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+.symptom[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.symptom[aria-selected="true"] .code{color:var(--pink)}
+.symptom[aria-selected="true"] .arr{opacity:1;transform:translateX(4px)}
+.diag{padding:clamp(22px,3.5vw,40px);display:flex;flex-direction:column;gap:22px;min-width:0}
+.diag-title{font-family:var(--f-display);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1}
+.diag dl{margin:0;display:grid;gap:18px}
+.diag dt{color:var(--red-text);margin-bottom:6px}
+.diag dd{margin:0;max-width:38em}
+.diag .tool{display:inline-block;background:var(--pink);color:#1B1215;font-family:var(--f-mono);font-size:.78rem;padding:3px 8px;margin:2px 6px 2px 0}
+.footnote{margin-top:16px;font-size:var(--s-small);color:var(--muted);max-width:44em}
+
+/* §3 Автор */
+.author{background:var(--wine);color:var(--on-wine)}
+.author .sec-num{color:var(--pink);border-color:var(--pink)}
+.author .sec-head p{color:color-mix(in srgb,var(--on-wine) 75%,transparent)}
+.author-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:clamp(28px,5vw,72px);align-items:start}
+@media (max-width:860px){.author-grid{grid-template-columns:1fr}}
+.author .photo{aspect-ratio:1;background:radial-gradient(circle,var(--pink) 1.3px,transparent 1.6px) 0 0/9px 9px,var(--red);border-color:var(--on-wine)}
+.author .photo::before,.author .photo::after{background:#2A0710}
+.author .caption{color:color-mix(in srgb,var(--on-wine) 70%,transparent)}
+.kit{border-top:2px solid var(--on-wine)}
+.kit-row{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:8px 28px;padding-block:20px;border-bottom:1px solid color-mix(in srgb,var(--on-wine) 22%,transparent)}
+.kit-row .label{color:var(--pink);padding-top:4px}
+.kit-row p{max-width:36em}
+.kit-row strong{font-family:var(--f-display);font-weight:400;font-size:var(--s-h3);display:block;margin-bottom:6px;line-height:1.2}
+@media (max-width:560px){.kit-row{grid-template-columns:1fr}}
+.quote{margin-top:36px;font-family:var(--f-display);font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.2;max-width:24em}
+.quote span{color:var(--pink)}
+
+/* §4 Предупреждения */
+.warn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);border-left:2px solid var(--ink)}
+@media (max-width:860px){.warn-grid{grid-template-columns:1fr}}
+.warn{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:26px 24px;display:flex;flex-direction:column;gap:14px;background:var(--sheet)}
+.warn svg{width:42px;height:38px;flex:none}
+.warn h3{font-size:var(--s-h3);line-height:1.15}
+.warn p{color:var(--muted);font-size:.98rem}
+
+/* §5 Форматы */
+.formats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:960px){.formats{grid-template-columns:1fr}}
+.fmt{border:2px solid var(--ink);background:var(--sheet);padding:26px;display:flex;flex-direction:column;gap:16px;position:relative}
+.fmt .label{color:var(--muted)}
+.fmt h3{font-size:clamp(1.6rem,2.6vw,2.1rem)}
+.fmt ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.fmt li{padding-left:22px;position:relative}
+.fmt li::before{content:"→";position:absolute;left:0;color:var(--red-text);font-family:var(--f-mono)}
+.fmt .meta{margin-top:auto;padding-top:16px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.fmt .meta span{font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.fmt.hot{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.fmt.hot .label,.fmt.hot .meta span{color:color-mix(in srgb,var(--paper) 65%,transparent)}
+.fmt.hot li::before{color:var(--pink)}
+.fmt.hot .btn{background:var(--red);border-color:var(--red);color:#fff}
+.fmt.hot .btn:hover{box-shadow:4px 4px 0 var(--pink)}
+.sticker{position:absolute;top:-14px;right:18px;background:var(--pink);color:#1B1215;font-family:var(--f-mono);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;transform:rotate(3deg);border:2px solid var(--ink)}
+
+/* §6 Гарантия + FAQ */
+.guarantee{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px)}
+@media (max-width:860px){.guarantee{grid-template-columns:1fr}}
+.cert{border:2px solid var(--ink);padding:clamp(24px,3.5vw,40px);background:var(--sheet);position:relative;outline:2px solid var(--ink);outline-offset:6px;margin:8px}
+.cert h3{font-size:clamp(1.8rem,3vw,2.5rem);margin-block:14px 18px}
+.cert ul{margin:0;padding:0;list-style:none;display:grid;gap:14px}
+.cert li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px}
+.cert li b{font-family:var(--f-mono);color:var(--red-text)}
+.cert .no{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red)}
+.cert .sign{margin-top:26px;display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.cert .sign .label{color:var(--muted)}
+.cert .seal{width:86px;aspect-ratio:1;border-radius:50%;border:2px solid var(--red);color:var(--red-text);display:grid;place-items:center;text-align:center;font-family:var(--f-mono);font-size:.56rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-14deg);line-height:1.25;padding:8px}
+details{border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:2px solid var(--ink)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding-block:18px;font-weight:700;font-size:1.05rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--red-text);font-size:1.3rem;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding-bottom:20px;color:var(--muted);max-width:38em}
+.faq h3{font-size:var(--s-h3);margin-bottom:18px}
+
+/* Финал */
+.final{background:var(--ink);color:var(--paper)}
+.final .wrap{padding-block:clamp(64px,9vw,120px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start}
+@media (max-width:860px){.final .wrap{grid-template-columns:1fr}}
+.final h2{font-size:clamp(2.4rem,6vw,4.8rem)}
+.final h2 em{font-style:normal;color:var(--red)}
+.final p.sub{margin-top:20px;max-width:30em;color:color-mix(in srgb,var(--paper) 72%,transparent)}
+form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field label{color:color-mix(in srgb,var(--paper) 65%,transparent)}
+.field input,.field select,.field textarea{font:inherit;color:var(--paper);background:transparent;border:0;border-bottom:2px solid color-mix(in srgb,var(--paper) 40%,transparent);padding:10px 0;border-radius:0;width:100%}
+.field select option{color:#1B1215}
+.field textarea{resize:vertical;min-height:80px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-color:var(--red)}
+.final .btn{background:var(--red);border-color:var(--red);color:#fff;justify-self:start;margin-top:8px}
+.final .btn:hover{box-shadow:4px 4px 0 var(--paper)}
+.form-note{font-size:var(--s-small);color:color-mix(in srgb,var(--paper) 60%,transparent)}
+.done{border:2px solid var(--red);padding:20px;font-size:1rem}
+
+footer{background:var(--ink);color:color-mix(in srgb,var(--paper) 55%,transparent);border-top:1px solid color-mix(in srgb,var(--paper) 15%,transparent)}
+footer .wrap{padding-block:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">yoga<b>_</b>anarchy</a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#myths">Мифы</a>
+      <a href="#trouble">Неисправности</a>
+      <a href="#author">Обо мне</a>
+      <a href="#formats">Форматы</a>
+      <a class="btn small" href="#contact">Записаться</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="manual-head label">
+          <span>Руководство по эксплуатации</span>
+          <span>Модель: человек</span>
+          <span>Проверено веками</span>
+        </div>
+        <h1>Йога — это <span class="strike">растяжка</span><br><em>инструкция</em> к&nbsp;жизни</h1>
+        <p class="lede">Её выдали вам вместе с телом, но мало кто дочитал дальше коврика. Я учитель йоги и помогаю наладить жизнь целиком: голову, работу, отношения и тело. <strong>Без эзотерики и марафонов желаний.</strong> С критическим мышлением и чёрным юмором.</p>
+        <div class="cta-row">
+          <a class="btn" href="#contact">Записаться на разбор →</a>
+          <a class="btn ghost" href="#trouble">Найти свою неисправность</a>
+        </div>
+      </div>
+      <figure class="figure" style="margin:0">
+        <div class="stamp" aria-hidden="true">Гибкость —<br>побочный<br>эффект</div>
+        <div class="photo" role="img" aria-label="Место для фотографии автора">
+          <span class="ph label">Здесь будет фото</span>
+        </div>
+        <figcaption class="caption label"><span>Рис. 1. Автор инструкции</span><span>yoga_anarchy</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Без благовоний по подписке</span><span>Без марафонов желаний</span><span>Без «просто отпусти»</span><span>Без пресса к лету</span><span>Без розовых единорогов</span><span>Без обещаний просветления за 21 день</span>
+      <span>Без благовоний по подписке</span><span>Без марафонов желаний</span><span>Без «просто отпусти»</span><span>Без пресса к лету</span><span>Без розовых единорогов</span><span>Без обещаний просветления за 21 день</span>
+    </div>
+  </div>
+
+  <section class="sec" id="myths">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">§ 1</div>
+        <div>
+          <h2>Почему вы не верите, что йога может наладить жизнь</h2>
+          <p>Про йогу слышал каждый. Поэтому кажется, что про неё всё понятно: гибкость, коврик, может быть, рельеф. Вот что обычно говорят и как обстоят дела на самом деле.</p>
+        </div>
+      </div>
+      <div class="spec" role="table" aria-label="Мифы о йоге">
+        <div class="spec-row head label" role="row"><span role="columnheader">Пункт</span><span role="columnheader">Что вы слышали</span><span role="columnheader">Как на самом деле</span></div>
+        <div class="spec-row" role="row"><span class="n" role="cell">1.1</span><span class="myth" role="cell">Йога делает гибче</span><p class="truth" role="cell">Делает. Но гибкость здесь побочный эффект. Основная функция йоги — управление вниманием, а от внимания зависит всё остальное: решения, реакции, сон, деньги.</p></div>
+        <div class="spec-row" role="row"><span class="n" role="cell">1.2</span><span class="myth" role="cell">Это для тех, у кого много свободного времени</span><p class="truth" role="cell">Наоборот. Практика возвращает часы, которые сейчас уходят на тревогу, прокрастинацию и прокручивание чужих фраз перед сном.</p></div>
+        <div class="spec-row" role="row"><span class="n" role="cell">1.3</span><span class="myth" role="cell">Это эзотерика, в неё надо верить</span><p class="truth" role="cell">Это система, которую проверяли веками. Многое в ней совпадает с тем, что сегодня изучают психология и физиология человека. Верить не нужно, нужно делать и смотреть на результат.</p></div>
+        <div class="spec-row" role="row"><span class="n" role="cell">1.4</span><span class="myth" role="cell">Максимум — пресс к лету</span><p class="truth" role="cell">Максимум — жизнь, которой вы управляете сами. Пресс тоже можно, но это не главное.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="trouble" style="padding-top:0">
+    <div class="wrap" style="padding-top:0">
+      <div class="sec-head">
+        <div class="sec-num">§ 2</div>
+        <div>
+          <h2>Неисправности и способы устранения</h2>
+          <p>Выберите, что у вас сейчас барахлит. Я покажу, откуда это обычно берётся и с чего мы начнём.</p>
+        </div>
+      </div>
+      <div class="trouble">
+        <div class="symptoms" role="tablist" aria-label="Неисправности" id="symptoms"></div>
+        <div class="diag" role="tabpanel" id="diag" aria-live="polite"></div>
+      </div>
+      <p class="footnote">Если симптом сильнее вас, сначала к врачу. Йога работает вместе с медициной, а не вместо неё.</p>
+    </div>
+  </section>
+
+  <section class="sec author" id="author">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">§ 3</div>
+        <div>
+          <h2>Об авторе инструкции</h2>
+          <p>Комплектация специалиста. Проверьте перед началом использования.</p>
+        </div>
+      </div>
+      <div class="author-grid">
+        <figure style="margin:0">
+          <div class="photo" role="img" aria-label="Место для второй фотографии автора"><span class="ph label">Фото для сайта</span></div>
+          <figcaption class="caption label"><span>Рис. 2. В естественной среде</span></figcaption>
+        </figure>
+        <div>
+          <div class="kit">
+            <div class="kit-row"><span class="label">Стаж</span><p><strong>Йога со мной с самого детства</strong>Я из первого поколения, у которого она была с самого начала. Коллеги чуть старше меня до неё дошли уже взрослыми, просто потому что раньше йога не была популярна.</p></div>
+            <div class="kit-row"><span class="label">Вторая жизнь</span><p><strong>Бизнес, продажи, консалтинг</strong>Поэтому я говорю про конкретный результат и про то, что вы будете делать в понедельник утром. Про вибрации — меньше.</p></div>
+            <div class="kit-row"><span class="label">Встроенные функции</span><p><strong>Критическое мышление, буддийская глубина, чёрный юмор</strong>Сомневаюсь во всём, включая себя. Цитирую сутры и шучу про смерть, иногда в одном предложении.</p></div>
+          </div>
+          <p class="quote">Йога налаживает жизнь покруче марафонов желаний. <span>Потому что её тестировали дольше.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="warnings">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">§ 4</div>
+        <div>
+          <h2>Меры предосторожности</h2>
+          <p>Прочитайте до начала занятий. Производитель предупредил.</p>
+        </div>
+      </div>
+      <div class="warn-grid">
+        <article class="warn">
+          <svg viewBox="0 0 42 38" aria-hidden="true"><path d="M21 2 40 36H2Z" fill="var(--red)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><rect x="19.4" y="13" width="3.2" height="12" fill="#fff"/><rect x="19.4" y="28" width="3.2" height="3.2" fill="#fff"/></svg>
+          <h3>Возможны побочные эффекты</h3>
+          <p>Спокойствие, ясность в голове, отказ от лишних обязательств и людей, которые вам давно не нравились.</p>
+        </article>
+        <article class="warn">
+          <svg viewBox="0 0 42 38" aria-hidden="true"><path d="M21 2 40 36H2Z" fill="var(--pink)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><rect x="19.4" y="13" width="3.2" height="12" fill="#1B1215"/><rect x="19.4" y="28" width="3.2" height="3.2" fill="#1B1215"/></svg>
+          <h3>Не подходит тем, кто ищет волшебную таблетку</h3>
+          <p>Работать придётся вам. Я покажу, как и зачем, и не дам соскочить.</p>
+        </article>
+        <article class="warn">
+          <svg viewBox="0 0 42 38" aria-hidden="true"><path d="M21 2 40 36H2Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><rect x="19.4" y="13" width="3.2" height="12" fill="var(--red)"/><rect x="19.4" y="28" width="3.2" height="3.2" fill="var(--red)"/></svg>
+          <h3>Может вызвать привыкание</h3>
+          <p>К собственной жизни. Обратного действия не наблюдалось.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="formats" style="padding-top:0">
+    <div class="wrap" style="padding-top:0">
+      <div class="sec-head">
+        <div class="sec-num">§ 5</div>
+        <div>
+          <h2>Варианты комплектации</h2>
+          <p>Онлайн, для русскоязычных людей в любой точке мира. Начать можно с одной встречи.</p>
+        </div>
+      </div>
+      <div class="formats">
+        <article class="fmt">
+          <span class="label">Разово · 90 минут</span>
+          <h3>Разбор полётов</h3>
+          <ul>
+            <li>Находим главную неисправность</li>
+            <li>Разбираем, откуда она взялась</li>
+            <li>Уходите с планом на первые две недели</li>
+          </ul>
+          <div class="meta"><span>Стоимость — при записи</span><a class="btn small ghost" href="#contact">Записаться</a></div>
+        </article>
+        <article class="fmt hot">
+          <span class="sticker">Чаще выбирают</span>
+          <span class="label">Месяц · лично</span>
+          <h3>Сопровождение</h3>
+          <ul>
+            <li>Еженедельные встречи один на один</li>
+            <li>Практики под вашу жизнь и ваш график</li>
+            <li>Связь между встречами, когда всё идёт не по плану</li>
+          </ul>
+          <div class="meta"><span>Стоимость — при записи</span><a class="btn small" href="#contact">Записаться</a></div>
+        </article>
+        <article class="fmt">
+          <span class="label">Группа · онлайн</span>
+          <h3>Практика в группе</h3>
+          <ul>
+            <li>Регулярные занятия: тело, дыхание, внимание</li>
+            <li>Короткая теория после практики</li>
+            <li>Люди, которые тоже решили разобраться</li>
+          </ul>
+          <div class="meta"><span>Стоимость — при записи</span><a class="btn small ghost" href="#contact">Записаться</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="guarantee" style="padding-top:0">
+    <div class="wrap" style="padding-top:0">
+      <div class="sec-head">
+        <div class="sec-num">§ 6</div>
+        <div><h2>Гарантийные обязательства</h2></div>
+      </div>
+      <div class="guarantee">
+        <div class="cert">
+          <span class="label" style="color:var(--muted)">Гарантийный талон № 108</span>
+          <h3>Что я обещаю</h3>
+          <ul>
+            <li><b>✕</b><span class="no">Просветление за 21 день</span></li>
+            <li><b>✕</b><span class="no">Что «вселенная всё даст»</span></li>
+            <li><b>✓</b><span>Работающие инструменты, которые вы сможете применять без меня</span></li>
+            <li><b>✓</b><span>Честный разговор, даже если он вам не понравится</span></li>
+            <li><b>✓</b><span>Объяснение, зачем вы делаете каждую практику</span></li>
+          </ul>
+          <div class="sign">
+            <div><div class="label">Подпись мастера</div><div style="font-family:var(--f-display);font-size:1.6rem">yoga_anarchy</div></div>
+            <div class="seal" aria-hidden="true">Проверено<br>веками</div>
+          </div>
+        </div>
+        <div class="faq">
+          <h3>Частые вопросы</h3>
+          <details><summary>Я совсем негибкий. Мне можно?</summary><p>Можно и нужно. Мы работаем с вашей жизнью, а не с вашим шпагатом. Растяжка придёт сама или не придёт, на результат это не влияет.</p></details>
+          <details><summary>Я атеист. Это не религия?</summary><p>Нет. Мы берём из йоги то, что работает: практики внимания, дыхания, принципы поведения. Верить ни во что не нужно. Сомневаться можно и полезно.</p></details>
+          <details><summary>Онлайн правда работает?</summary><p>Да. Нужен ноутбук или телефон, коврик и полчаса тишины. Последнее обычно найти сложнее всего, с этого и начнём.</p></details>
+          <details><summary>Где вы находитесь?</summary><p>Работаю онлайн с русскоязычными людьми по всему миру. Часовой пояс подберём.</p></details>
+          <details><summary>А если не поможет?</summary><p>На первой встрече я честно скажу, смогу ли помочь с вашей ситуацией. Если нет, скажу, к кому идти.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" id="contact">
+    <div class="wrap">
+      <div>
+        <span class="label" style="color:var(--pink)">§ 7 · Начало эксплуатации</span>
+        <h2 style="margin-top:14px">Хватит жить <em>без инструкции</em></h2>
+        <p class="sub">Оставьте контакт и коротко опишите, что не работает. Я напишу сама и предложу время для первой встречи.</p>
+      </div>
+      <div id="formbox">
+        <form id="lead" novalidate>
+          <div class="field"><label class="label" for="f-name">Как к вам обращаться</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label class="label" for="f-contact">Telegram или телефон</label><input id="f-contact" name="contact" required></div>
+          <div class="field"><label class="label" for="f-topic">Что барахлит</label>
+            <select id="f-topic" name="topic"></select></div>
+          <div class="field"><label class="label" for="f-msg">Пара слов о ситуации (необязательно)</label><textarea id="f-msg" name="msg"></textarea></div>
+          <button class="btn" type="submit">Отправить заявку →</button>
+          <p class="form-note" id="form-err" hidden>Заполните имя и контакт, чтобы я могла вам ответить.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap label">
+    <span>yoga_anarchy · 2026</span>
+    <span>Инструкция не заменяет консультацию врача</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var items=[
+    {code:"E-01",s:"Тревога не выключается",
+     cause:"Нервная система живёт в режиме «опасность» и не получает сигнала, что можно выдохнуть. Мысли бегают по кругу, потому что им некуда приземлиться.",
+     fix:"Начинаем с дыхания: оно переключает режим быстрее любых уговоров. Потом учимся замечать мысль до того, как она разгонится.",
+     tools:["пранаяма","дхарана — концентрация","режим сна"]},
+    {code:"E-02",s:"Работаю много, а толку мало",
+     cause:"Внимание размазано на двадцать задач и три чата. Энергия уходит на переключения, а не на дело.",
+     fix:"Наводим порядок во внимании и в приоритетах. Тут пригодится и йога, и мой опыт в бизнесе и консалтинге.",
+     tools:["санкальпа — намерение","тапас — дисциплина","аудит дня"]},
+    {code:"E-03",s:"Отношения идут по одному сценарию",
+     cause:"Автоматические реакции срабатывают быстрее, чем вы успеваете подумать. Люди меняются, а сценарий остаётся.",
+     fix:"Находим, где включается автопилот, и учимся делать паузу между раздражителем и ответом. Сутры описали это задолго до психологов.",
+     tools:["ямы — принципы отношений","свадхьяя — самоизучение","практика паузы"]},
+    {code:"E-04",s:"Тело как будто чужое",
+     cause:"Тело годами работает подставкой для головы. Сигналы усталости и боли игнорируются, пока не станут громкими.",
+     fix:"Возвращаем контакт с телом через асаны и дыхание. Без задачи сесть в шпагат, с задачей чувствовать, что с вами происходит.",
+     tools:["асаны","пранаяма","сканирование тела"]},
+    {code:"E-05",s:"Всё есть, а смысла нет",
+     cause:"Цели были чужими или закончились. Снаружи всё в порядке, внутри — пустая комната.",
+     fix:"Разбираемся, чего хотите именно вы, и отделяем это от того, чего от вас ждут. Буддийская философия здесь очень практична.",
+     tools:["свадхьяя","вайрагья — отпускание","дхарма — своё дело"]},
+    {code:"E-06",s:"Ничего не довожу до конца",
+     cause:"Мотивация заканчивается раньше, чем дело. Вы рассчитываете на настроение, а оно ненадёжно.",
+     fix:"Строим маленькую ежедневную практику, которая не зависит от настроения. Регулярность важнее героизма.",
+     tools:["тапас","абхьяса — постоянство","минимальная практика"]}
+  ];
+  var list=document.getElementById("symptoms"),panel=document.getElementById("diag"),sel=document.getElementById("f-topic");
+  function render(i){
+    var it=items[i];
+    panel.innerHTML='<span class="label" style="color:var(--muted)">Код неисправности '+it.code+'</span>'+
+      '<div class="diag-title">'+it.s+'</div>'+
+      '<dl><div><dt class="label">Вероятная причина</dt><dd>'+it.cause+'</dd></div>'+
+      '<div><dt class="label">Способ устранения</dt><dd>'+it.fix+'</dd></div>'+
+      '<div><dt class="label">Инструменты</dt><dd>'+it.tools.map(function(t){return '<span class="tool">'+t+'</span>'}).join('')+'</dd></div></dl>'+
+      '<div><a class="btn" href="#contact" data-topic="'+i+'">Устранить '+it.code+' →</a></div>';
+    Array.prototype.forEach.call(list.children,function(b,j){b.setAttribute("aria-selected",j===i?"true":"false");b.tabIndex=j===i?0:-1});
+    panel.setAttribute("aria-labelledby","sym-"+i);
+  }
+  items.forEach(function(it,i){
+    var b=document.createElement("button");
+    b.className="symptom";b.type="button";b.id="sym-"+i;b.setAttribute("role","tab");b.setAttribute("aria-controls","diag");
+    b.innerHTML='<span class="code">'+it.code+'</span><span>'+it.s+'</span><span class="arr">→</span>';
+    b.addEventListener("click",function(){render(i)});
+    b.addEventListener("keydown",function(e){
+      var k=e.key,n=null;
+      if(k==="ArrowDown"||k==="ArrowRight")n=(i+1)%items.length;
+      if(k==="ArrowUp"||k==="ArrowLeft")n=(i-1+items.length)%items.length;
+      if(n!==null){e.preventDefault();render(n);list.children[n].focus()}
+    });
+    list.appendChild(b);
+    var o=document.createElement("option");o.value=i;o.textContent=it.code+" · "+it.s;sel.appendChild(o);
+  });
+  var other=document.createElement("option");other.value="other";other.textContent="Другое / не знаю";sel.appendChild(other);
+  render(0);
+  panel.addEventListener("click",function(e){
+    var a=e.target.closest("[data-topic]");if(a){sel.value=a.getAttribute("data-topic")}
+  });
+
+  var form=document.getElementById("lead"),err=document.getElementById("form-err");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=form.elements.name.value.trim(),c=form.elements.contact.value.trim();
+    if(!name||!c){err.hidden=false;return}
+    err.hidden=true;
+    var box=document.getElementById("formbox");
+    var d=document.createElement("div");d.className="done";
+    d.innerHTML='<div class="label" style="color:var(--pink);margin-bottom:8px">Демо-версия сайта</div>';
+    var p=document.createElement("p");
+    p.textContent=name+", спасибо! На готовом сайте заявка придёт мне в Telegram или на почту. Сейчас это пример, поэтому она никуда не отправилась.";
+    d.appendChild(p);box.replaceChildren(d);
+  });
+})();
+</script>
